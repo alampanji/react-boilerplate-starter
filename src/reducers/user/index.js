@@ -19,7 +19,7 @@ const initialState = {
 export default (state = initialState, action) => {
     switch(action.type){
         case LOGIN:
-            const newState = action.payload
+            const newState = action.payload    
         default:
             return state;
     }

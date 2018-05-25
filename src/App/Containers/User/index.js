@@ -1,8 +1,11 @@
 import React from 'react';
-import {Row, Col, Table, Button} from 'antd';
+import {Row, Col, Table, Button, Modal} from 'antd';
 import HeaderTitle from '../../Components/HeaderTitle';
 import MainButton from '../../Components/MainButton';
 import Constant from '../../../config/constant';
+import DetailUser from '../../Components/DetailUser'
+import {connect} from 'react-redux';
+import {getDetailUser, getPostUser} from '../../../reducers/user_list/action'
 import './index.scss';
 
 class User extends React.Component{
@@ -10,8 +13,11 @@ class User extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            data:[]
+            data:[],
+            modalDetail: false
         }
+        this.getDetail = this.getDetail.bind(this);
+        this.modalClose = this.modalClose.bind(this);
     }
 
     componentDidMount(){
@@ -25,12 +31,23 @@ class User extends React.Component{
             ({...obj, key:obj.id}
         ))
         this.setState({
-            data:constructPayload
+            data:constructPayload,
         })
     }
 
+
+
     getDetail(id){
-        // console.log(id);
+       this.props.getDetailUser(id);
+       this.setState({
+           modalDetail: true
+       })
+    }
+
+    modalClose(){
+        this.setState({
+            modalDetail: false
+        })
     }
 
     render(){
@@ -66,10 +83,39 @@ class User extends React.Component{
             <div className="user-container">
                 <HeaderTitle title={`User`} subtitle={`List of User Application`}/>
                 <Table dataSource={this.state.data} columns={columns} />
+
+                <Modal
+                    title="Detail User"
+                    visible={this.state.modalDetail}
+                    onCancel={this.modalClose}
+                    footer={null }
+                    width="50%"
+                    >
+                    {
+                        this.props.user !== undefined ? 
+                            <DetailUser {...this.props.user} />
+                        : null
+                    }
+                </Modal>
             </div>
         )
     }
     
 }
 
-export default User;
+const mapStateToProps = state=>{
+    return{
+        user: state.user_list.detail
+    }
+}
+
+const mapDispatchToProps = dispatch=>{
+    return{
+        getDetailUser: (id)=>{
+            dispatch(getDetailUser(id)),
+            dispatch(getPostUser(id))
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps) (User);

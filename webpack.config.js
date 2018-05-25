@@ -11,6 +11,7 @@ module.exports = {
   entry: './src/index.js',
   output: {
     path: path.join(__dirname, "./dist"),
+    // path: __dirname + '/dist',
     filename: 'bundle.js',
     publicPath:'/'
   },
@@ -45,7 +46,18 @@ module.exports = {
             loader: "sass-loader" // compiles Sass to CSS
           }
         ]
-      }
+      },
+      {
+        test: /\.(jpg|png|gif|svg|pdf|ico)$/,
+        use: [
+            {
+                loader: 'file-loader',
+                options: {
+                    name: '[path][name]-[hash:8].[ext]'
+                },
+            },
+        ]
+    },
     ]
   },
   plugins: [htmlWebpackPlugin]
