@@ -16,7 +16,7 @@ class Dashboard extends React.Component{
         return(
             <div className="dashboard-container">
                 <HeaderTitle title="Dashboard" subtitle="Dashboard of News App"/>
-                <InfoCard listInf={this.props.dashboard} />
+                <InfoCard {...this.props.dashboard} />
             </div>
         )
     }

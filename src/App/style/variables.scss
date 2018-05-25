@@ -1,1 +1,12 @@
-$headerFont: Roboto-Regular
+@font-face {
+    font-family: Lato-Regular;
+    src: url(../../assets/fonts/Lato-Regular.ttf);
+}
+
+@font-face {
+    font-family: Lato-Thin;
+    src: url(../../assets/fonts/Lato-Thin.ttf);
+}
+
+$headerFont: Lato-Regular;
+$headerThin: Lato-Thin;

@@ -4,6 +4,7 @@ import {Route, Link} from 'react-router-dom';
 import Login from '../../Containers/Login';
 import './index.scss';
 import Dashboard from '../../Containers/Dashboard'
+import User from '../../Containers/User'
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
 
@@ -33,7 +34,7 @@ const SideMenu = ({})=>{
                                 </Link>
                             </Menu.Item>
                             <Menu.Item key="2">
-                                <Link to="/user"> 
+                                <Link to="/dashboard/user"> 
                                     <Icon type="user" />
                                     <span className="nav-text">User</span>
                                 </Link>
@@ -50,7 +51,7 @@ const SideMenu = ({})=>{
 
                         <Content style={{ background: '#fff', padding: 24, margin: 0, minHeight: 280 }}>
                             <Route exact path="/dashboard" component={Dashboard} />
-                            <Route path="/dashboard/home" component={Login} />
+                            <Route path="/dashboard/user" component={User} />
                         </Content>
                     </Layout>
                 </Layout>
