@@ -1,0 +1,9 @@
+@import '../../style/colors';
+
+.info-card-container{
+    .list{
+        border: 1px solid $mainColor;
+        height: 150px;
+        border-radius: 4px
+    }
+}

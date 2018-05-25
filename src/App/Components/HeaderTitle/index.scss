@@ -1,0 +1,12 @@
+@import '../../style/colors';
+
+.header-title-container{
+    h2{
+        color: $titleColor
+    }
+
+    h6{
+        font-size: 9pt;
+        color: $subtitleColor;
+    }
+}

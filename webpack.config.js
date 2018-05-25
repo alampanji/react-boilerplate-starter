@@ -8,8 +8,17 @@ const htmlWebpackPlugin = new HtmlWebPackPlugin({
 var path = require('path')
 
 module.exports = {
+  entry: './src/index.js',
+  output: {
+    path: path.join(__dirname, "./dist"),
+    filename: 'bundle.js',
+    publicPath:'/'
+  },
   devServer: {
+    inline: true,
     historyApiFallback: true,
+    contentBase: './src',
+    port: 8100
   },
   module: {
     rules: [
