@@ -1,18 +1,25 @@
 import {
-    ADD_POST
+    LOAD_COMMENT_POST,
+    SET_EMPTY_COMMENT
 } from './action';
 
 const initialState = {
-    data:{
-        name:'Putraning Panji Alam',
-        date: '23 Mei 2018'
-    }
+    data:{},
+    comments:[]
 }
 
 export default (state = initialState, action) => {
     switch(action.type){
-        case ADD_POST:
-            const newState = action.payload
+        case LOAD_COMMENT_POST:
+            const newState = Object.assign({}, state);
+            newState.data = action.post;
+            newState.comments = action.comments;
+            return newState;
+        case SET_EMPTY_COMMENT:
+            const newValue = Object.assign({}, state);
+            newValue.data = {};
+            newValue.comments = [];
+            return newValue;  
         default:
             return state;
     }
