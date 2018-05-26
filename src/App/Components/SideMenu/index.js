@@ -5,6 +5,7 @@ import Login from '../../Containers/Login';
 import './index.scss';
 import Dashboard from '../../Containers/Dashboard'
 import User from '../../Containers/User'
+import Post from '../../Containers/Post'
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
 
@@ -40,7 +41,7 @@ const SideMenu = ({})=>{
                                 </Link>
                             </Menu.Item>
                             <Menu.Item key="3">
-                                <Link to="/post"> 
+                                <Link to="/dashboard/post"> 
                                     <Icon type="file-text" />
                                     <span className="nav-text">Post</span>
                                 </Link>
@@ -52,6 +53,7 @@ const SideMenu = ({})=>{
                         <Content style={{ background: '#fff', padding: 24, margin: 0, minHeight: 280 }}>
                             <Route exact path="/dashboard" component={Dashboard} />
                             <Route path="/dashboard/user" component={User} />
+                            <Route path="/dashboard/post" component={Post} />
                         </Content>
                     </Layout>
                 </Layout>
