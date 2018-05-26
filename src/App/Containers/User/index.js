@@ -4,8 +4,13 @@ import HeaderTitle from '../../Components/HeaderTitle';
 import MainButton from '../../Components/MainButton';
 import Constant from '../../../config/constant';
 import DetailUser from '../../Components/DetailUser'
+import DetailAlbumUser from '../../Components/DetailAlbumUser'
 import {connect} from 'react-redux';
-import {getDetailUser, getPostUser} from '../../../reducers/user_list/action'
+import {
+    getDetailUser, 
+    getPostUser,
+    getAlbumUser
+} from '../../../reducers/user_list/action'
 import './index.scss';
 
 class User extends React.Component{
@@ -14,10 +19,12 @@ class User extends React.Component{
         super(props);
         this.state={
             data:[],
-            modalDetail: false
+            modalDetail: false,
+            modalAlbum: false
         }
         this.getDetail = this.getDetail.bind(this);
         this.modalClose = this.modalClose.bind(this);
+        this.modalAlbumClose = this.modalAlbumClose.bind(this);
     }
 
     componentDidMount(){
@@ -44,9 +51,23 @@ class User extends React.Component{
        })
     }
 
+    getDetailAlbum(id){
+        this.props.getDetailUserAlbum(id);
+        this.setState({
+            modalAlbum: true
+        })
+    }
+
+    
     modalClose(){
         this.setState({
             modalDetail: false
+        })
+    }
+
+    modalAlbumClose(){
+        this.setState({
+            modalAlbum: false
         })
     }
 
@@ -73,7 +94,10 @@ class User extends React.Component{
                 dataIndex: 'id',
                 key: 'id',
                 render: (id) => (
-                    <MainButton action={()=>this.getDetail(id)} label={`DETAIL`} />
+                    <div>
+                        <MainButton action={()=>this.getDetail(id)} label={`DETAIL`} />
+                        <MainButton action={()=>this.getDetailAlbum(id)} label={`DETAIL ALBUM`} />
+                    </div>
                 )
             }
         ];
@@ -97,6 +121,20 @@ class User extends React.Component{
                         : null
                     }
                 </Modal>
+
+                <Modal
+                    title="Album User"
+                    visible={this.state.modalAlbum}
+                    onCancel={this.modalAlbumClose}
+                    footer={null }
+                    width="50%"
+                    >
+                    {
+                        this.props.user !== undefined ? 
+                            <DetailAlbumUser {...this.props.user} />
+                        : null
+                    }
+                </Modal>
             </div>
         )
     }
@@ -114,6 +152,9 @@ const mapDispatchToProps = dispatch=>{
         getDetailUser: (id)=>{
             dispatch(getDetailUser(id)),
             dispatch(getPostUser(id))
+        },
+        getDetailUserAlbum:(id)=>{
+            dispatch(getAlbumUser(id))
         }
     }
 }
