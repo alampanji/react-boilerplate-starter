@@ -3,12 +3,12 @@ import {Row, Col, Table, Button, Modal, message} from 'antd';
 import HeaderTitle from '../../Components/HeaderTitle';
 import MainButton from '../../Components/MainButton';
 import IgnoreButton from '../../Components/IgnoreButton';
-import FormAddPost from '../../Components/AddPost';
-import FormUpdatePost from '../../Components/UpdatePost';
+import FormAddComment from '../../Components/AddComment'
+import FormUpdateComment from '../../Components/UpdateComment';
 import Constant from '../../../config/constant';
 import {connect} from 'react-redux';
 import {deletes} from '../../api/service';
-import {getPostById} from '../../../reducers/post/action';
+import {getCommentById} from '../../../reducers/comment/action';
 import './index.scss';
 
 class Comment extends React.Component{
@@ -62,7 +62,7 @@ class Comment extends React.Component{
     }
 
     updateComment(data){
-        this.props.getPostData(data);
+        this.props.getCommentData(data);
         this.setState({
             modalUpdateComment:true
         })
@@ -72,11 +72,11 @@ class Comment extends React.Component{
     const url = Constant.MASTER_PATH_API + Constant.URL_GET_COMMENT + '/' + id
         deletes(url).then(response=>{
             if(response.status === 200){
-                message.success('Success delete posts'); 
+                message.success('Success delete comment'); 
                 this.getData();  
             }
             else{
-              message.error('Failed to add new post');
+              message.error('Failed to delete new comment');
             }
         })
     }
@@ -100,7 +100,7 @@ class Comment extends React.Component{
                 key: 'id',
                 render: (id) => (
                     <div>
-                        <MainButton action={()=>this.updatePost(id)} label={`UPDATE`} />
+                        <MainButton action={()=>this.updateComment(id)} label={`UPDATE`} />
                         <IgnoreButton action={()=>this.delete(id)} label={`DELETE`} />
                     </div>
                 )
@@ -115,23 +115,23 @@ class Comment extends React.Component{
                 <Table dataSource={this.state.data} columns={columns} />
 
                 <Modal
-                    title="Add Post"
+                    title="Add Comment"
                     visible={this.state.modalAddComment}
                     onCancel={this.modalAddClose}
                     footer={null }
                     width="50%"
                     >
-                        <FormAddPost closeModal={this.modalAddClose} />
+                        <FormAddComment closeModal={this.modalAddClose} />
                 </Modal>
 
                 <Modal
-                    title="Album User"
-                    visible={this.state.modalUpdatePost}
-                    onCancel={this.modalAlbumClose}
+                    title="Update Comment"
+                    visible={this.state.modalUpdateComment}
+                    onCancel={this.modalUpdateClose}
                     footer={null }
                     width="50%"
                     >
-                    <FormUpdatePost data={this.props.selectedPost} closeModal={this.modalUpdateClose} />
+                    <FormUpdateComment data={this.props.selectedComment} closeModal={this.modalUpdateClose} />
                 </Modal>
             </div>
         )
@@ -141,14 +141,14 @@ class Comment extends React.Component{
 
 const mapStateToProps = state=>{
     return{
-        selectedPost: state.posts.current
+        selectedComment: state.comments.data
     }
 }
 
 const mapDispatchToProps = dispatch=>{
     return{
-        getPostData : (id)=>{
-            dispatch(getPostById(id));
+        getCommentData : (id)=>{
+            dispatch(getCommentById(id));
         }
     }
 }

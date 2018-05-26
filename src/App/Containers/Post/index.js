@@ -120,9 +120,9 @@ class Post extends React.Component{
                 </Modal>
 
                 <Modal
-                    title="Album User"
+                    title="Update Post"
                     visible={this.state.modalUpdatePost}
-                    onCancel={this.modalAlbumClose}
+                    onCancel={this.modalUpdateClose}
                     footer={null }
                     width="50%"
                     >
