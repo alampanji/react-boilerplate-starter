@@ -6,6 +6,7 @@ import './index.scss';
 import Dashboard from '../../Containers/Dashboard'
 import User from '../../Containers/User'
 import Post from '../../Containers/Post'
+import Comment from '../../Containers/Comment'
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
 
@@ -46,6 +47,12 @@ const SideMenu = ({})=>{
                                     <span className="nav-text">Post</span>
                                 </Link>
                             </Menu.Item>
+                            <Menu.Item key="4">
+                                <Link to="/dashboard/comment"> 
+                                    <Icon type="message" />
+                                    <span className="nav-text">Comment</span>
+                                </Link>
+                            </Menu.Item>
                         </Menu>
                     </Sider>
                     <Layout style={{ padding: '0 24px 24px' }}>
@@ -54,6 +61,7 @@ const SideMenu = ({})=>{
                             <Route exact path="/dashboard" component={Dashboard} />
                             <Route path="/dashboard/user" component={User} />
                             <Route path="/dashboard/post" component={Post} />
+                            <Route path="/dashboard/comment" component={Comment} />
                         </Content>
                     </Layout>
                 </Layout>

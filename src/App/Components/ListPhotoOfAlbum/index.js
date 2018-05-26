@@ -8,7 +8,7 @@ const ListOfPhotoAlbum = ({photoList})=>{
             <div>
                 {
                     photoList.map((photo, index)=>(
-                        <Row>
+                        <Row key={index}>
                             <Col xs={24}>
                                 <h3>{photo.title}</h3>
                             </Col>

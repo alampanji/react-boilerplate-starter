@@ -11,19 +11,19 @@ import {deletes} from '../../api/service';
 import {getPostById} from '../../../reducers/post/action';
 import './index.scss';
 
-class Post extends React.Component{
+class Comment extends React.Component{
 
     constructor(props){
         super(props);
         this.state={
             data:[],
-            modalAddPost: false,
-            modalUpdatePost:false,
+            modalAddComment: false,
+            modalUpdateComment:false,
             selected:{}
         }
         this.modalAddClose = this.modalAddClose.bind(this);
-        this.addPost = this.addPost.bind(this);
-        this.updatePost = this.updatePost.bind(this);
+        this.addComment = this.addComment.bind(this);
+        this.updateComment = this.updateComment.bind(this);
         this.modalUpdateClose = this.modalUpdateClose.bind(this);
     }
 
@@ -32,7 +32,7 @@ class Post extends React.Component{
     }
     
     async getData(){
-        const response = await fetch(Constant.MASTER_PATH_API + Constant.URL_GET_POST);
+        const response = await fetch(Constant.MASTER_PATH_API + Constant.URL_GET_COMMENT);
         const data = await response.json();
         const constructPayload = data.map(obj=>
             ({...obj, key:obj.id}
@@ -45,31 +45,31 @@ class Post extends React.Component{
     
     modalAddClose(){
         this.setState({
-            modalAddPost: false
+            modalAddComment: false
         })
     }
 
     modalUpdateClose(){
         this.setState({
-            modalUpdatePost: false
+            modalUpdateComment: false
         })
     }
 
-    addPost(){
+    addComment(){
         this.setState({
-            modalAddPost:true
+            modalAddComment:true
         })
     }
 
-    updatePost(data){
+    updateComment(data){
         this.props.getPostData(data);
         this.setState({
-            modalUpdatePost:true,
+            modalUpdateComment:true
         })
     }
 
     delete(id){
-        const url = Constant.MASTER_PATH_API + Constant.URL_GET_POST + '/' + id
+    const url = Constant.MASTER_PATH_API + Constant.URL_GET_COMMENT + '/' + id
         deletes(url).then(response=>{
             if(response.status === 200){
                 message.success('Success delete posts'); 
@@ -85,9 +85,14 @@ class Post extends React.Component{
           
         const columns = [
             {
-                title: 'Title',
-                dataIndex: 'title',
-                key: 'title',
+                title: 'Name',
+                dataIndex: 'name',
+                key: 'name',
+            }, 
+            {
+                title: 'Posted By',
+                dataIndex: 'email',
+                key: 'email',
             }, 
             {
                 title: 'Action',
@@ -105,13 +110,13 @@ class Post extends React.Component{
 
         return(
             <div className="user-container">
-                <HeaderTitle title={`Post`} subtitle={`List of User Content Post`}/>
-                <MainButton label={`ADD POST`} action={this.addPost} />
+                <HeaderTitle title={`Comment`} subtitle={`List of Comment`}/>
+                <MainButton label={`ADD NEW COMMENT`} action={this.addComment} />
                 <Table dataSource={this.state.data} columns={columns} />
 
                 <Modal
                     title="Add Post"
-                    visible={this.state.modalAddPost}
+                    visible={this.state.modalAddComment}
                     onCancel={this.modalAddClose}
                     footer={null }
                     width="50%"
@@ -148,4 +153,4 @@ const mapDispatchToProps = dispatch=>{
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps) (Post);
+export default connect(mapStateToProps, mapDispatchToProps) (Comment);
