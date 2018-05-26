@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import reducers from './reducers';
 import Routes from './routes';
 import 'antd/dist/antd.min.css';
+import './App/style/main.scss';
 
 const store = createStore(reducers, compose(
   applyMiddleware(thunk),

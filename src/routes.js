@@ -6,7 +6,7 @@ import Login from './App/Containers/Login';
 const Routes = ()=>{
     return(
         <Router>
-            <div>
+            <div style={{height:"100%"}}>
                 <Switch>
                     <Route exact path='/' component={Login} />
                     <Route path='/dashboard' component={SideMenu} />
