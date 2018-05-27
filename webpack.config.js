@@ -11,7 +11,6 @@ module.exports = {
   entry: './src/index.js',
   output: {
     path: path.join(__dirname, "./dist"),
-    // path: __dirname + '/dist',
     filename: 'bundle.js',
     publicPath:'/'
   },
@@ -24,7 +23,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
@@ -48,7 +47,7 @@ module.exports = {
         ]
       },
       {
-        test: /\.(jpg|png|gif|svg|pdf|ico)$/,
+        test: /\.(jpg|png|gif|svg|pdf|ico|eot|svg|ttf|woff|woff2)$/,
         use: [
             {
                 loader: 'file-loader',
