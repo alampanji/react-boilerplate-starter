@@ -18,7 +18,8 @@ module.exports = {
     inline: true,
     historyApiFallback: true,
     contentBase: './src',
-    port: 8100
+    port: 8100,
+    hot: true
   },
   module: {
     rules: [
