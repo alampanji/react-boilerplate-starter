@@ -1,5 +1,3 @@
-Kumparan Front-end Engineer Test Putraning Panji Alam
-
 ## Instructions
 
 1.  Clone this repo

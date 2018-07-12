@@ -1,23 +1,13 @@
 {
-  "name": "kumparan-test",
+  "name": "test",
   "version": "1.0.0",
-  "description": "test assignment kumparan",
+  "description": "test assignment",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --mode development --open --hot",
     "build": "webpack --mode production"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/alampanji/kumparan-test-assignment.git"
-  },
-  "author": "alampanji",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/alampanji/kumparan-test-assignment/issues"
-  },
-  "homepage": "https://github.com/alampanji/kumparan-test-assignment#readme",
   "dependencies": {
     "antd": "^3.5.3",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
